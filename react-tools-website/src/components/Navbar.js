@@ -1,40 +1,42 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
+import { FaUserCircle, FaSignInAlt } from 'react-icons/fa'; // Import icons from react-icons library
 
 const Navigation = () => {
   return (
-    <Navbar bg="light" variant="light" expand="lg" className="custom-navbar">
-      <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
-        <img
-          src="https://via.placeholder.com/30"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-          alt="Logo"
-        />
-        <span className="ml-2">PDF Tools</span>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mx-auto">
-          <Nav.Link as={Link} to="/">Home</Nav.Link>
-          <NavDropdown title="Tools" id="basic-nav-dropdown" className="custom-dropdown">
-            <NavDropdown.Item as={Link} to="/pdf-to-word">PDF to Word</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/remove-image-background">Remove Image Background</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/compress-image">Compress Image</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/compress-pdf">Compress PDF</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/jpg-to-pdf">JPG to PDF</NavDropdown.Item>
-          </NavDropdown>
-          <Nav.Link as={Link} to="/about">About</Nav.Link>
-        </Nav>
-        <Nav>
-          <Nav.Link as={Link} to="/contact-us">
-            <Button variant="outline-dark" className="mr-2">Contact Us</Button>
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <header className="header">
+      <Navbar expand="lg" className="navbar-custom">
+        <Navbar.Brand href="/">
+          <img
+            src="/img/ilovepdf.svg"
+            width="40"
+            height="40"
+            className="d-inline-block align-top"
+            alt="iLovePDF"
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto ">
+            <Nav.Link href="#pdf-to-word">PDF to Word</Nav.Link>
+            <Nav.Link href="#remove-bg">Remove Image Background</Nav.Link>
+            <Nav.Link href="#compress-image">Compress Image</Nav.Link>
+            <Nav.Link href="#compress-pdf">Compress PDF</Nav.Link>
+            <Nav.Link href="#jpg-to-pdf">JPG to PDF</Nav.Link>
+          </Nav>
+          <Nav className="ml kip"> {/* Use ml-auto to push items to the right */}
+            <Button variant="outline-dark" className="mr-5">
+              <FaSignInAlt className="icon" /> Login
+            </Button>
+            <Button variant="danger">
+              <FaUserCircle className="icon" /> Sign Up
+            </Button>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </header>
   );
 };
 

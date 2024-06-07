@@ -11,6 +11,7 @@ import HomePage from './components/Home';
 import DocxToPdf from './pages/WordToPdf';
 import PdfToDocx from './pages/PdfToWord';
 import MergePdf from './pages/mergepdf';
+import ResizeImage from './pages/ResizeImage';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path='/merge-pdf' element={<MergePdf/>}/>
+        <Route path='/image-resizer' element={<ResizeImage/>}/>
+
       </Routes>
     </div>
   );

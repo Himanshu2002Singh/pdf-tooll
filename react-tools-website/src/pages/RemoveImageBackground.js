@@ -3,65 +3,60 @@ import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 const RemoveBackground = () => {
-    const [file, setFile] = useState(null);
-    const [converting, setConverting] = useState(false);
+  const [file, setFile] = useState(null);
+  const [removing, setRemoving] = useState(false);
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-    const handleConvert = async () => {
-        if (!file) {
-            alert('Please choose an image file first');
-            return;
-        }
+  const handleRemoveBackground = async () => {
+    if (!file) {
+      alert('Please choose an image file first');
+      return;
+    }
 
-        setConverting(true);
+    setRemoving(true);
 
-        try {
-            const formData = new FormData();
-            formData.append('imageFile', file);
+    try {
+      const formData = new FormData();
+      formData.append('imageFile', file);
 
-            const response = await axios.post('http://localhost:5000/remove-background', formData, {
-                responseType: 'blob',
-            });
+      const response = await axios.post('http://localhost:5000/remove-background', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        responseType: 'blob',
+      });
 
-            // Create a blob from the response data
-            const blob = new Blob([response.data], { type: 'image/png' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'bg_removed_image.png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error removing background:', error);
+      alert('Error removing background. Please try again.');
+    } finally {
+      setRemoving(false);
+    }
+  };
 
-            // Create a temporary URL to download the file
-            const url = window.URL.createObjectURL(blob);
-
-            // Create a link element, set download attribute, and click it programmatically
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'removed_background_image.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            setFile(null);
-        } catch (error) {
-            console.error('Error removing background:', error);
-            alert('Error removing background. Please try again.');
-        } finally {
-            setConverting(false);
-        }
-    };
-
-    return (
-        <Container className="mt-5">
-            <Row>
-                <Col md={{ span: 6, offset: 3 }}>
-                    <h2 className="text-center">Image Background Removal</h2>
-                    <input type="file" accept="image/*" onChange={handleFileChange} />
-                    <Button variant="primary" onClick={handleConvert} disabled={!file || converting}>
-                        {converting ? <Spinner animation="border" size="sm" /> : 'Remove Background'}
-                    </Button>
-                </Col>
-            </Row>
-        </Container>
-    );
+  return (
+    <Container className="mt-5">
+      <Row>
+        <Col md={{ span: 6, offset: 3 }}>
+          <h2 className="text-center">Remove Image Background</h2>
+          <input type="file" onChange={handleFileChange} />
+          <Button variant="primary" onClick={handleRemoveBackground} disabled={!file || removing} className="mt-3">
+            {removing ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Remove Background'}
+          </Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default RemoveBackground;

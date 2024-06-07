@@ -1,66 +1,49 @@
+/* CSS for enhanced appearance */
 body {
-  background-color: #f8f9fa;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Graphik', Arial, sans-serif; /* Adjust font family as per your design */
+  line-height: 2rem;
 }
 
-.custom-navbar {
-  background-color: white !important;
+.header {
+  background-color: white;
+  padding: 5px 3px;
+  box-shadow: 0 5px 19px rgba(12, 12, 12, 0.1);
 }
 
-.navbar-brand {
-  font-weight: bold;
-  font-size: 1.5rem;
+.navbar-custom .navbar-brand img {
+  margin-right: 200px; /* Example margin for logo */
 }
 
-.navbar-nav .nav-link, .navbar-nav .nav-dropdown .dropdown-item {
-  color: black !important;
-  font-weight: bold;
+.navbar-custom .nav-link {
+  color: rgb(100, 100, 100); /* Example link color */
+  font-size: medium;
+  font-weight: 550;
+  margin-left: 15px;
+
 }
 
-.navbar-nav .nav-link:hover, .navbar-nav .nav-dropdown .dropdown-item:hover {
-  color: orange !important;
+.navbar-custom .nav-link:hover {
+  color: rgb(212, 49, 49); /* Example hover color */
 }
 
-.navbar-nav .btn-outline-dark {
-  border-color: black !important;
-  color: black !important;
-  font-weight: bold;
+.navbar-custom .btn {
+  margin-left: 20px; /* Example margin for buttons */
 }
 
-.navbar-nav .btn-outline-dark:hover {
-  background-color: black !important;
-  color: orange !important;
+.navbar-custom .btn-danger {
+  background-color: rgb(212, 49, 49); /* Red background for Login button */
+  border-color: rgb(212, 49, 49); /* Red border color for Login button */
 }
 
-.container {
-  padding-top: 50px;
+.navbar-custom .btn-danger:hover {
+  background-color: #c12121; /* Darker red on hover for Login button */
+  border-color: #c12121; /* Darker border color on hover for Login button */
 }
 
-/* Custom dropdown styling */
-@media (max-width: 992px) {
-  .custom-dropdown {
-    width: 100%; /* Adjust the width as needed */
-    border-radius: 0;
-    box-shadow: none
-  }
+.navbar-custom .icon {
+  margin-right: 5px; /* Space between icon and text */
+}
 
-  .custom-dropdown .dropdown-menu {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #ffffff;
-    box-shadow: none;
-  }
-
-  .custom-dropdown .dropdown-item {
-    color: #333;
-    font-weight: bold;
-    padding: 8px 20px;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .custom-dropdown .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: #007bff;
-  }
+.navbar-custom .kip{
+  margin-left: 20%;
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 const ImageToPdf = () => {
   const [file, setFile] = useState(null);
-  const [processing, setProcessing] = useState(false);
+  const [converting, setConverting] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -16,34 +16,31 @@ const ImageToPdf = () => {
       return;
     }
 
-    setProcessing(true);
+    setConverting(true);
 
     try {
       const formData = new FormData();
       formData.append('imageFile', file);
 
-      const response = await axios.post('http://localhost:5000/convert-image-to-pdf', formData, {
-        responseType: 'blob', // Important: responseType must be 'blob' for file download
+      const response = await axios.post('http://localhost:5000/image-to-pdf', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        responseType: 'blob',
       });
 
-      // Create a blob from the response data
-      const blob = new Blob([response.data], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
-
-      // Create a link element, set download attribute and click it programmatically
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'converted_document.pdf';
+      link.setAttribute('download', 'converted_document.pdf');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      setFile(null); // Clear selected file
     } catch (error) {
       console.error('Error converting image:', error);
       alert('Error converting image. Please try again.');
     } finally {
-      setProcessing(false);
+      setConverting(false);
     }
   };
 
@@ -53,8 +50,8 @@ const ImageToPdf = () => {
         <Col md={{ span: 6, offset: 3 }}>
           <h2 className="text-center">Image to PDF Converter</h2>
           <input type="file" onChange={handleFileChange} />
-          <Button variant="primary" onClick={handleConvert} disabled={!file || processing}>
-            {processing ? 'Processing...' : 'Convert to PDF'}
+          <Button variant="primary" onClick={handleConvert} disabled={!file || converting} className="mt-3">
+            {converting ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Convert to PDF'}
           </Button>
         </Col>
       </Row>
