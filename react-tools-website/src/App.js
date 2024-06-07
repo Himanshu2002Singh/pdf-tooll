@@ -26,7 +26,7 @@ function App() {
         <Route path="/jpg-to-pdf" element={<ImageToPdf />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact-us" element={<ContactUs />} />
-        <Route path='merge-pdf' element={<MergePdf/>}/>
+        <Route path='/merge-pdf' element={<MergePdf/>}/>
       </Routes>
     </div>
   );

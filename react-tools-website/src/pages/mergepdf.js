@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import './MergePdf.css';
 
 const MergePdf = () => {
   const [files, setFiles] = useState(null);

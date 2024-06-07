@@ -4,7 +4,7 @@ import os
 from flask_cors import CORS
 import pdfkit
 from pdf2docx import Converter
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 import uuid
 
 app = Flask(__name__)
@@ -63,8 +63,6 @@ def convert_docx_to_pdf():
     except Exception as e:
         print(f"Error converting DOCX: {str(e)}")
         return jsonify({'error': 'Error converting DOCX. Please try again.'}), 500
-    
-
 
 @app.route('/merge-pdf', methods=['POST'])
 def merge_pdf():
@@ -73,7 +71,7 @@ def merge_pdf():
             return jsonify({'error': 'No files were uploaded.'}), 400
 
         files = request.files.getlist('files[]')
-        merger = PdfFileMerger()
+        merger = PdfMerger()
 
         for file in files:
             if file.filename == '':
@@ -85,10 +83,14 @@ def merge_pdf():
                 merger.append(file_path)
 
         merged_file_path = os.path.join(UPLOAD_FOLDER, 'merged_document.pdf')
-        merger.write(merged_file_path)
+        with open(merged_file_path, 'wb') as f_out:
+            merger.write(f_out)
         merger.close()
 
-        return send_file(merged_file_path, as_attachment=True, attachment_filename='merged_document.pdf')
+        response = make_response(send_file(merged_file_path, as_attachment=True))
+        response.headers['Content-Disposition'] = 'attachment; filename="merged_document.pdf"'
+
+        return response
 
     except Exception as e:
         print(f"Error merging PDFs: {str(e)}")
