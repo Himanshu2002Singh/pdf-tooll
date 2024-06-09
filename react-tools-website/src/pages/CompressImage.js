@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner, Form } from 'react-bootstrap';
 import axios from 'axios';
+import './Converter.css'; // Import a custom CSS file for additional styling
 
 const CompressImage = () => {
   const [file, setFile] = useState(null);
@@ -49,15 +50,41 @@ const CompressImage = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">Compress Image</h2>
-          <input type="file" onChange={handleFileChange} />
+        <Col md={{ span: 7, offset: 2 }} className="text-center">
+          <h1 className="text-center font-weight-bold">Compress Image</h1>
+          <p>
+            Upload your image file and compress it easily. Adjust the quality to balance between file size and image clarity. Perfect for sharing images with reduced file sizes.
+          </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="d-none"
+            id="file-input"
+          />
+          <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+            Select Image File
+          </label>
           <Form.Group className="mt-3">
             <Form.Label>Quality (1-100)</Form.Label>
-            <Form.Control type="number" value={quality} onChange={(e) => setQuality(e.target.value)} min="1" max="100" />
+            <Form.Control
+              type="number"
+              value={quality}
+              onChange={(e) => setQuality(e.target.value)}
+              min="1"
+              max="100"
+              className="text-center"
+            />
           </Form.Group>
-          <Button variant="primary" onClick={handleCompress} disabled={!file || compressing} className="mt-3">
-            {compressing ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Compress Image'}
+          <Button
+            onClick={handleCompress}
+            disabled={compressing}
+            className="btn btn-custom btn-lg mt-3"
+          >
+            {compressing ? (
+              <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+            ) : (
+              'Compress Image'
+            )}
           </Button>
         </Col>
       </Row>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import './Converter.css';  // Import the CSS file for custom styles
+import './Converter.css'; // Import the CSS file for custom styles
 
 const PdfToDocx = () => {
   const [file, setFile] = useState(null);
@@ -38,35 +38,49 @@ const PdfToDocx = () => {
 
       setFile(null);
     } catch (error) {
-      if(error.response){
-      console.error('Error converting:', error.response.data.error);
-      alert(error.response.data.error); 
-      } 
-      else if (error.request) {
-        // The request was made but no response was received
+      if (error.response) {
+        console.error('Error converting:', error.response.data.error);
+        alert(error.response.data.error);
+      } else if (error.request) {
         console.error('Network Error:', error.request);
         alert('Network Error. Please check your internet connection.');
-      
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.error('Error:', error.message);
-          alert('An unexpected error occurred. Please try again later.');
-        }
+      } else {
+        console.error('Error:', error.message);
+        alert('An unexpected error occurred. Please try again later.');
       }
-    finally {
+    } finally {
       setConverting(false);
     }
   };
 
   return (
-    <Container className="mt-5 converter-container">
+    <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">PDF to DOCX Converter</h2>
-          <input type="file" onChange={handleFileChange} />
-          <Button onClick={handleConvert} disabled={!file || converting} className="mt-3 custom-button">
-            {converting ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Convert to DOCX'}
-          </Button>
+        <Col md={{ span: 6, offset: 3 }} className="text-center">
+          <h2 className="text-center font-weight-bold">PDF to DOCX Converter</h2>
+          <p>
+            Easily convert your PDF documents into editable DOCX files. Upload your PDF, click the "Convert to DOCX" button, and download the converted document instantly. Preserve formatting and content structure while enabling further editing in Microsoft Word or other compatible applications.
+          </p>
+          <input type="file" onChange={handleFileChange} className="d-none" id="file-input" />
+          {!file && (
+            <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+              Select a PDF File
+            </label>
+          )}
+          {file && (
+            <Button
+              variant='danger'
+              onClick={handleConvert}
+              disabled={converting}
+              className="btn btn-custom btn-lg mt-3"
+            >
+              {converting ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Convert to DOCX'
+              )}
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>

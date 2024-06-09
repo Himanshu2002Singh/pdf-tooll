@@ -1,37 +1,52 @@
-.converter-container {
+.text-center {
   text-align: center;
-  background-color: #f9f9f9;
-  padding: 50px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #333;
+.font-weight-bold {
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
-input[type="file"] {
-  margin: 20px 0;
+
+
+p{
+  font-size: 1rem;
+  color: rgb(79, 78, 78);
+  font-weight: bold;
 }
 
-.custom-button {
-  background-color: #FFA500; /* Orange color */
+.btn-custom {
+  background-color: rgb(212, 49, 49);
+  border-color: rgb(212, 49, 49);
+  font-size: 1.8rem;
+  padding: 12px 22px;
+  color: #fff;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-custom:hover {
+  background-color: #c12121; /* Darker red on hover for Login button */
+  border-color: #c12121; 
+  transform: scale(1.05);
   color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+}
+.btn-primary {
+  background-color: rgb(212, 49, 49);
+  border-color: rgb(212, 49, 49);
 }
 
-.custom-button:hover {
-  background-color: #FF8C00; /* Darker orange color for hover effect */
+.btn-primary:hover {
+  background-color: #c12121; /* Darker red on hover for Login button */
+  border-color: #c12121; 
 }
 
-.custom-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.d-none {
+  display: none;
 }

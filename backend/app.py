@@ -172,6 +172,11 @@ def resize_image():
         resized_image_path = os.path.join(UPLOAD_FOLDER, f"{unique_id}_resized_{filename}")
         with Image.open(image_path) as img:
             img = img.resize((width, height))
+
+            # Convert image to RGB if it has an alpha channel
+            if img.mode == 'RGBA':
+                img = img.convert('RGB')
+
             img.save(resized_image_path)
 
         response = make_response(send_file(resized_image_path, as_attachment=True))
@@ -181,7 +186,7 @@ def resize_image():
 
     except Exception as e:
         print(f"Error resizing image: {str(e)}")
-        return jsonify({'error': 'Error resizing image. Please try again.'}), 500
+       
 
 @app.route('/compress-image', methods=['POST'])
 def compress_image():

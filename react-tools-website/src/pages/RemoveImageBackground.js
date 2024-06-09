@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import './Converter.css'; // Import a custom CSS file for additional styling
 
 const RemoveBackground = () => {
   const [file, setFile] = useState(null);
@@ -47,12 +48,36 @@ const RemoveBackground = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">Remove Image Background</h2>
-          <input type="file" onChange={handleFileChange} />
-          <Button variant="primary" onClick={handleRemoveBackground} disabled={!file || removing} className="mt-3">
-            {removing ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Remove Background'}
-          </Button>
+        <Col md={{ span: 6, offset: 3 }} className="text-center">
+          <h2 className="text-center font-weight-bold">Remove Image Background</h2>
+          <p>
+            Upload your image file to remove its background easily. This tool helps you create transparent backgrounds for your images, making them perfect for various uses such as graphic design, presentations, and more.
+          </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="d-none"
+            id="file-input"
+          />
+          {!file && (
+            <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+              Select an Image File
+            </label>
+          )}
+          {file && (
+            <Button
+              variant="danger"
+              onClick={handleRemoveBackground}
+              disabled={removing}
+              className="btn btn-custom btn-lg mt-3"
+            >
+              {removing ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Remove Background'
+              )}
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>

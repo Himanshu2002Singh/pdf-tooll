@@ -2,6 +2,7 @@
 body {
   font-family: 'Graphik', Arial, sans-serif; /* Adjust font family as per your design */
   line-height: 2rem;
+  background-color: rgb(226, 225, 225);
 }
 
 .header {

@@ -1,0 +1,101 @@
+.footer-main {
+    background-color: whitesmoke;
+    color: red;
+    padding: 50px 0;
+    width: 100%;
+    height: max-content;
+    margin-top: 10px;
+  }
+  
+  .footer-section {
+    margin-bottom: 50px;
+  }
+  
+  .footer-section__title {
+    font-weight: bold;
+    font-size: medium;
+    margin-bottom: 15px;
+    color: red; /* Updated title color */
+  }
+  
+  .footer-section__nav {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section__nav li {
+    margin-bottom: 8px;
+    color: black; /* Updated navigation item color */
+  }
+  
+  .footer-section__nav a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-section__nav a:hover {
+    color: red; /* Hover color changed to red */
+  }
+  
+  .app-store {
+    margin-top: 20px;
+  }
+  
+  .app-store img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .separator {
+    border-top: 1px solid #555;
+    margin: 30px 0;
+  }
+  
+  .footer-language {
+    font-size: 16px;
+    color: #ccc;
+  }
+  
+  .footer-slogan {
+    margin-bottom: 10px;
+  }
+  
+  .footer-social {
+    font-size: 24px;
+  }
+  
+  .social-item {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.3s ease;
+  }
+  
+  .social-item:hover {
+    opacity: 0.7;
+  }
+  
+  .social-item--twitter {
+    background-image: url('/src/img/twitter.svg');
+  }
+  
+  .social-item--facebook {
+    background-image: url('/src/img/facebook.svg');
+  }
+  
+  .social-item--linkedin {
+    background-image: url('/src/img/linkedin.svg');
+  }
+  
+  .social-item--instagram {
+    background-image: url('/src/img/instagram.svg');
+  }
+  
+  .social-item--tiktok {
+    background-image: url('/src/img/tiktok.svg');
+  }
+  

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import './MergePdf.css';
+import './Converter.css'; // Import a custom CSS file for additional styling
 
 const MergePdf = () => {
   const [files, setFiles] = useState(null);
@@ -50,12 +50,37 @@ const MergePdf = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">Merge PDF Files</h2>
-          <input type="file" onChange={handleFileChange} multiple />
-          <Button variant="primary" onClick={handleMerge} disabled={!files || merging}>
-            {merging ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Merge PDFs'}
-          </Button>
+        <Col md={{ span: 7, offset: 2 }} className="text-center">
+          <h1 className="text-center font-weight-bold">Merge PDF Files</h1>
+          <p>
+            Select multiple PDF files to merge into a single document. Ensure you select at least two files for merging.
+          </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            multiple
+            className="d-none"
+            id="file-input"
+          />
+          {!files && (
+            <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+              Select PDF Files
+            </label>
+          )}
+          {files && (
+            <Button
+              variant="danger"
+              onClick={handleMerge}
+              disabled={merging}
+              className="btn btn-custom btn-lg mt-3"
+            >
+              {merging ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Merge PDFs'
+              )}
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>

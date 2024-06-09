@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import './Converter.css'; // Import a custom CSS file for additional styling
 
 const ImageToPdf = () => {
   const [file, setFile] = useState(null);
@@ -47,12 +48,36 @@ const ImageToPdf = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">Image to PDF Converter</h2>
-          <input type="file" onChange={handleFileChange} />
-          <Button variant="primary" onClick={handleConvert} disabled={!file || converting} className="mt-3">
-            {converting ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Convert to PDF'}
-          </Button>
+        <Col md={{ span: 7, offset: 2 }} className="text-center">
+          <h1 className="text-center font-weight-bold">Image to PDF Converter</h1>
+          <p>
+            Upload your image file and convert it to a PDF easily. This tool helps you create a PDF document from your images quickly and efficiently.
+          </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="d-none"
+            id="file-input"
+          />
+          {!file && (
+            <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+              Select Image File
+            </label>
+          )}
+          {file && (
+            <Button
+              variant="danger"
+              onClick={handleConvert}
+              disabled={converting}
+              className="btn btn-custom btn-lg mt-3"
+            >
+              {converting ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Convert to PDF'
+              )}
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>

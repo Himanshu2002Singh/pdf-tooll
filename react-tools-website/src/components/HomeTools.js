@@ -7,9 +7,9 @@ const functionalities = [
   { icon: 'fa-file-word', label: 'PDF to Word', link: '/pdf-to-word', description: 'Convert PDF files to editable Microsoft Word documents (.docx) with high accuracy.' },
   { icon: 'fa-file-pdf', label: 'Word to PDF', link: '/word-to-pdf', description: 'Easily convert Microsoft Word documents (.docx) to PDF format for better compatibility.' },
   { icon: 'fa-file-image', label: 'JPG to PDF', link: '/jpg-to-pdf', description: 'Transform JPEG images into PDF documents quickly and effortlessly.' },
-  { icon: 'fa-expand', label: 'Image Resizer', link: '/image-resizer', description: 'Resize images to specific dimensions or scale them down for web and sharing purposes.' },
+  { icon: 'fa-expand', label: 'Image Resizer', link: '/image-resizer', description: 'Resize images to specific dimensions them down for web and sharing purposes.' },
   { icon: 'fa-compress', label: 'Image Compress', link: '/compress-image', description: 'Compress images to reduce file size without compromising visual quality.' },
-  { icon: 'fa-eraser', label: 'Remove Image Background', link: '/remove-image-background', description: 'Remove the background from images automatically or manually with precision.' },
+  { icon: 'fa-eraser', label: 'Remove Background', link: '/remove-image-background', description: 'Remove the background from images automatically or manually with precision.' },
 ];
 
 const HomeTools = () => {

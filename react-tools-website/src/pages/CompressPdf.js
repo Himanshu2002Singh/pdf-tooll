@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import './Converter.css'; // Import a custom CSS file for additional styling
 
 const CompressPdf = () => {
   const [file, setFile] = useState(null);
@@ -47,12 +48,36 @@ const CompressPdf = () => {
   return (
     <Container className="mt-5">
       <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <h2 className="text-center">Compress PDF</h2>
-          <input type="file" onChange={handleFileChange} />
-          <Button variant="primary" onClick={handleCompress} disabled={!file || compressing} className="mt-3">
-            {compressing ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Compress PDF'}
-          </Button>
+        <Col md={{ span: 7, offset: 2 }} className="text-center">
+          <h1 className="text-center font-weight-bold">Compress PDF</h1>
+          <p>
+            Upload your PDF file and compress it easily. This tool helps you reduce the file size while maintaining the quality of the document. Perfect for sharing or storing your PDFs with less space.
+          </p>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="d-none"
+            id="file-input"
+          />
+          {!file && (
+            <label htmlFor="file-input" className="btn btn-custom btn-lg mt-3">
+              Select PDF File
+            </label>
+          )}
+          {file && (
+            <Button
+              variant="danger"
+              onClick={handleCompress}
+              disabled={compressing}
+              className="btn btn-custom btn-lg mt-3"
+            >
+              {compressing ? (
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+              ) : (
+                'Compress PDF'
+              )}
+            </Button>
+          )}
         </Col>
       </Row>
     </Container>
