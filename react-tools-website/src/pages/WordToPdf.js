@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import './Converter.css'; // Import a custom CSS file for additional styling
+import Navigation from '../components/Navbar';
+import AuthProvider from '../components/AuthContext';
 
 const DoxToPdf = () => {
   const [file, setFile] = useState(null);
@@ -45,7 +47,12 @@ const DoxToPdf = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <div>
+       <AuthProvider>
+    <Navigation/>
+    </AuthProvider>
+    
+    <Container className="main">
       <Row>
         <Col md={{ span: 6, offset: 3 }} className="text-center">
           <h2 className="text-center font-weight-bold">DOCX to PDF Converter</h2>
@@ -75,6 +82,7 @@ const DoxToPdf = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

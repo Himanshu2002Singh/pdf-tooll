@@ -2,12 +2,20 @@ import React from 'react';
 import HomeTools from './HomeTools'; // Adjust the path as per your file structure
 import './HomePage.css';
 import Fotter from './Fotter';
+import Navigation from './Navbar';
+import  AuthProvider  from './AuthContext';
 
 
 const HomePage = () => {
   return (
+    <div>
+      <AuthProvider>
+    <Navigation/>
+    </AuthProvider>
+    
     <div className="main">
       {/* Background Pattern */}
+     
       {/* Home Title */}
       <div className="home-title">
         <h1 className="home-title__title">Comprehensive PDF tools all in one convenient site</h1>
@@ -57,7 +65,7 @@ const HomePage = () => {
             <p className="premium-description">
             Boost productivity by utilizing batch file processing, OCR technology for converting scanned documents, and electronic signatures for your business agreements.
             </p>
-            <a href='/'>
+            <a href='/user-premium'>
             <button className="premium-button">Get Premium</button>
             </a>
           </div>
@@ -70,6 +78,8 @@ const HomePage = () => {
 <div>
   <Fotter/>
 </div>
+</div>
+
 </div>
 
   );

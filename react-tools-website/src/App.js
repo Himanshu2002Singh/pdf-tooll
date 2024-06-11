@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navbar';
+import AuthProvider from './components/AuthContext';
 import CompressImage from './pages/CompressImage';
 import CompressPdf from './pages/CompressPdf';
 import About from './components/About';
@@ -12,11 +12,18 @@ import DocxToPdf from './pages/WordToPdf';
 import PdfToDocx from './pages/PdfToWord';
 import MergePdf from './pages/mergepdf';
 import ResizeImage from './pages/ResizeImage';
+import Login from './pages/Login';
+import CreateAccount from './pages/CreateAccount';
+import Rules from './components/Rules';
+import ForgotPassword from './pages/Forgetpasword';
+import PricingPage from './pages/Pricepage';
+
 
 function App() {
   return (
     <div>
-      <Navigation />
+      <AuthProvider>
+        
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/word-to-pdf" element={<DocxToPdf/>} />
@@ -25,12 +32,17 @@ function App() {
         <Route path="/compress-image" element={<CompressImage />} />
         <Route path="/compress-pdf" element={<CompressPdf />} />
         <Route path="/jpg-to-pdf" element={<ImageToPdf />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/legal-data-privacy" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path='/merge-pdf' element={<MergePdf/>}/>
+        <Route path='/terms-conditions' element={<Rules/>}/>
         <Route path='/image-resizer' element={<ResizeImage/>}/>
-
+        <Route path='/user-login' element={<Login/>}/>
+        <Route path='/user-signup' element={<CreateAccount/>}/>
+        <Route path='/forget-password' element={<ForgotPassword/>}/>
+        <Route path= '/user-premium' element={<PricingPage/>}/>
       </Routes>
+      </AuthProvider>
     </div>
   );
 }

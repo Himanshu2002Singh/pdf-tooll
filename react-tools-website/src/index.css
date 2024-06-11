@@ -3,13 +3,19 @@ body {
   font-family: 'Graphik', Arial, sans-serif; /* Adjust font family as per your design */
   line-height: 2rem;
   background-color: rgb(226, 225, 225);
+   /* Reset default padding */
 }
 
-.header {
-  background-color: white;
-  padding: 5px 3px;
-  box-shadow: 0 5px 19px rgba(12, 12, 12, 0.1);
-}
+
+  .header {
+    background-color: white;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1); /* Example box shadow */
+    position: fixed; /* Make the header fixed */
+    width: 100%; /* Ensure the header spans the full width */
+    z-index: 1000; /* Ensure it's above other content */
+    padding: 4px 4px;
+  }
+
 
 .navbar-custom .navbar-brand img {
   margin-right: 200px; /* Example margin for logo */
@@ -29,6 +35,8 @@ body {
 
 .navbar-custom .btn {
   margin-left: 20px; /* Example margin for buttons */
+   padding: 10px 10px ;
+
 }
 
 .navbar-custom .btn-danger {
@@ -42,9 +50,23 @@ body {
 }
 
 .navbar-custom .icon {
-  margin-right: 5px; /* Space between icon and text */
+  margin-right: 5px;
+   
+  font-size: 0.8rem; /* Space between icon and text */
+}
+.navbar-custom .iconp {
+  margin-right: 5px;
+  color: #c12121;
+  font-size: 1.3rem; /* Space between icon and text */
 }
 
 .navbar-custom .kip{
-  margin-left: 20%;
+  margin-left: 18%;
+}
+
+@media (max-width: 768px) {
+  .navbar-custom .btn {
+   margin-left: auto;
+    width: 50%;/* Example margin for buttons */
+  }
 }

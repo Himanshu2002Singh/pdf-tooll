@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner, Form } from 'react-bootstrap';
 import axios from 'axios';
 import './Converter.css'; // Import a custom CSS file for additional styling
+import Navigation from '../components/Navbar';
+import AuthProvider from '../components/AuthContext';
 
 const ResizeImage = () => {
   const [file, setFile] = useState(null);
@@ -50,7 +52,11 @@ const ResizeImage = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <div>
+    <AuthProvider>
+    <Navigation/>
+    </AuthProvider>
+    <Container className="main">
       <Row>
         <Col md={{ span: 6, offset: 3 }} className="text-center">
           <h2 className="text-center font-weight-bold">Resize Image</h2>
@@ -109,6 +115,7 @@ const ResizeImage = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

@@ -1,0 +1,171 @@
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    
+  }
+  
+  .login-left {
+    flex: 1;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+   
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+  }
+
+.login-link {
+    margin-top: 20px;
+  }
+.login-link a {
+    color: #d9534f;
+    text-decoration: none;
+  }
+.terms-policy {
+    margin-top: 10px;
+    color: #666;
+    font-size: 0.8em;
+
+    a{
+        color: red;
+    }
+ }
+
+  .login-right{
+    flex: 1;
+    display: flex;
+    background-color: whitesmoke;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-logo img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .social-login-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .social-login-buttons button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .social-login-buttons .facebook-btn {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .social-login-buttons .google-btn {
+    background-color: #db4437;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+
+    a{
+        color: red;
+    }
+  }
+  
+  .login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .create-account {
+    margin-top: 20px;
+    a{
+        color: red;
+    }
+  }
+  
+  .message {
+    margin-top: 10px;
+    color: red;
+  }
+  
+  .image-section img {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .workspace-info {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .workspace-info h2 {
+    margin-bottom: 10px;
+  }
+  
+  .workspace-info p {
+    margin-bottom: 20px;
+
+   
+  }
+ 
+ .workspace-info a {
+    color: red;
+}
+  @media (max-width: 768px) {
+    .login-container {
+      flex-direction: column;
+    }
+  
+    .login-left, .login-right {
+      width: 100%;
+    }
+  
+    .social-login-buttons button {
+      margin: 10px 0;
+    }
+  
+    .image-section img {
+      max-width: 100%;
+    }
+  }
+  

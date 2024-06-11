@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button, Spinner, Form } from 'react-bootstrap';
 import axios from 'axios';
 import './Converter.css'; // Import a custom CSS file for additional styling
+import Navigation from '../components/Navbar';
+import AuthProvider from '../components/AuthContext';
 
 const CompressImage = () => {
   const [file, setFile] = useState(null);
@@ -48,7 +50,11 @@ const CompressImage = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <div>
+    <AuthProvider>
+    <Navigation/>
+    </AuthProvider>
+    <Container className="main">
       <Row>
         <Col md={{ span: 7, offset: 2 }} className="text-center">
           <h1 className="text-center font-weight-bold">Compress Image</h1>
@@ -89,6 +95,7 @@ const CompressImage = () => {
         </Col>
       </Row>
     </Container>
+       </div>
   );
 };
 

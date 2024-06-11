@@ -1,18 +1,57 @@
-from flask import Flask, request, send_file, make_response, jsonify
+from flask import Flask, request, send_file, make_response, jsonify, render_template, url_for
 from werkzeug.utils import secure_filename
 import os
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 from pdf2docx import Converter
 from PyPDF2 import PdfMerger
 import uuid
+from flask_mail import Mail, Message
 from docx2pdf import convert as docx2pdf_convert
 from PIL import Image
 import fitz  # PyMuPDF library
+
+from dotenv import load_dotenv
+
 from rembg import remove
 
 app = Flask(__name__)
 CORS(app)
 UPLOAD_FOLDER = 'uploads'
+load_dotenv()
+
+# Update the database URI to connect to MySQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:null@localhost/pdf'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+
+# Configure Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER')
+
+mail = Mail(app)
+
+
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
+# Create database and tables
+with app.app_context():
+    db.create_all()
+
+
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -242,6 +281,82 @@ def remove_background():
     except Exception as e:
         print(f"Error removing background: {str(e)}")
         return jsonify({'error': 'Error removing background. Please try again.'}), 500
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+    
+    if not name or not email or not password:
+        return jsonify({"message": "All fields are required"}), 400
+    
+    if User.query.filter_by(email=email).first():
+        return jsonify({"message": "Email already exists"}), 400
+    
+    # hashed_password = generate_password_hash(password, method='sha256')
+    
+    new_user = User(name=name, email=email, password= password)
+    
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message": f"Account created successfully for {name}!"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": "An error occurred while creating the account"}), 500
+
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+    
+    user = User.query.filter_by(email=email).first()
+    
+    if not user or user.password != password:
+        return jsonify({"message": "Invalid email or password"}), 401
+    
+    return jsonify({"message": f"Logged in successfully as {user.name}!"}), 200
+
+
+@app.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.get_json()
+    email = data.get('email')
+    
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"message": "Email not registered"}), 404
+    
+    # Send password reset email
+    msg = Message('Password Reset Request', recipients=[email])
+    reset_link = url_for('reset_password', email=email, _external=True)
+    msg.body = f'Click the link to reset your password: {reset_link}'
+    mail.send(msg)
+    
+    return jsonify({"message": "Password reset link has been sent to your email."})
+
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
+    email = request.args.get('email')
+    
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        user = User.query.filter_by(email=email).first()
+        
+        if user:
+            user.password = new_password
+            db.session.commit()
+            return jsonify({"message": "Password has been updated successfully."})
+        
+        return jsonify({"message": "Invalid email."}), 400
+    
+    return render_template('reset_password.html', email=email)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
